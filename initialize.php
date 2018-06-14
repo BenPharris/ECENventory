@@ -21,9 +21,8 @@ $sql = "CREATE TABLE items(
 if(mysqli_query($link, $sql)){
 	echo "Table created successfully.";
 } else{
-	echo "ERROR: Could not execute $sql. " . mysqli_error($link);
+	echo "ERROR: " . mysqli_error($link);
 }
-
 mysqli_close($link);	
 
 ?>

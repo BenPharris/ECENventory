@@ -39,7 +39,7 @@ if ($result->num_rows > 0){
 		}
 
 echo $barcode . "
-<form action='http://localhost/edit.php' method='post'>
+<form action='edit.php' method='post'>
 <input type='hidden' id='barcode' name='barcode' value='$barcode'  autocomplete='off'><br>
 <label for='type'>Type: </label>
 <input type='type' id='type' name='type' value='$type' maxlength='70' autocomplete='off'><br>
@@ -67,7 +67,7 @@ echo $barcode . "
 </form>";
 } else {
 echo $cardinfo . "
-<form action='http://localhost/create.php' method='post'>
+<form action='create.php' method='post'>
 <input type='hidden' id='barcode' name='barcode' value='$cardinfo'  autocomplete='off'><br>
 <label for='type'>Type: </label>
 <input type='type' id='type' name='type' maxlength='70' autocomplete='off'><br>
