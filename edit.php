@@ -30,13 +30,13 @@ $sql = "UPDATE items SET
 
 if ($link->query($sql) === TRUE) {
 	echo "Success!";
-	echo "<form action='/index.php' method='post'>
+	echo "<form action='index.php' method='post'>
 		<label for='barcode'>Scan Barcode</label>
 		<input type='barcode' id='barcode' name='barcode' autofocus='autofocus' autocomplete='off'>
 		</form>";
 } else {
 	echo "Error updating record: " . $link->error;
-	echo "<form action='/index.php' method='post'>
+	echo "<form action='index.php' method='post'>
 		<label for='barcode'>Scan Barcode</label>
 		<input type='barcode' id='barcode' name='barcode' autofocus='autofocus' autocomplete='off'>
 		</form>";
