@@ -16,6 +16,7 @@ $notes = htmlspecialchars($_POST['notes']);
 include 'connection.php';
 
 // The order and number of items in the INSERT INTO and VALUES statements need to be identical
+//Ben was here
 $sql = "INSERT INTO items (barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes)
 		VALUES ('$barcode', '$type', '$manufacturer', '$model', '$location', '$user', '$serial', '$warranty_start', '$warranty_end', '$speedtype', '$description', '$notes')";
 
