@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inventory</title>
+	<link href="./style.css" type="text/css" rel="stylesheet">
+	<link rel="icon" type="image/png" href="./searchicon.png">
+</head>
+<body>
+
 <?php
 $barcode = htmlspecialchars($_POST['barcode']);
 $type = htmlspecialchars($_POST['type']);
@@ -31,16 +40,19 @@ $sql = "UPDATE items SET
 if ($link->query($sql) === TRUE) {
 	echo "Success!";
 	echo "<form action='index.php' method='post'>
-		<label for='barcode'>Scan Barcode</label>
-		<input type='barcode' id='barcode' name='barcode' autofocus='autofocus' autocomplete='off'>
+		<label for='barcode'>Scan Barcode</label><br>
+		<input type='search' id='barcode' name='barcode' autofocus='autofocus' autocomplete='off'>
 		</form>";
 } else {
 	echo "Error updating record: " . $link->error;
 	echo "<form action='index.php' method='post'>
-		<label for='barcode'>Scan Barcode</label>
-		<input type='barcode' id='barcode' name='barcode' autofocus='autofocus' autocomplete='off'>
+		<label for='barcode'>Scan Barcode</label><br>
+		<input type='search' id='barcode' name='barcode' autofocus='autofocus' autocomplete='off'>
 		</form>";
 }
 
 $link->close();
 ?>
+
+</body>
+</html>
