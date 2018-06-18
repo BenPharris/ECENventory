@@ -87,7 +87,10 @@ echo "<h1> Editing Record for " . $barcode . "</h1>
 </form>";
 } else {
 
-	
+//code to check whether $cardinfo is a barcode or a serial goes here
+//include logic in this part of the form to post cardinfo either into 'barcode' or 'serial'
+
+
 echo "<h1> Creating Record for " . $cardinfo . "</h1>
 <form action='create.php' method='post'>
 <input type='hidden' id='barcode' name='barcode' value='$cardinfo'  autocomplete='off'><br>
