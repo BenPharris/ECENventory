@@ -31,14 +31,14 @@ $sql = "INSERT INTO items (barcode, type, manufacturer, model, location, user, s
 if ($link->query($sql) === TRUE) {
 	echo "Success! Created record for " . $barcode;
 	echo "<form action='index.php' method='post'>
-		<label for='barcode'>Scan Barcode</label><br>
-		<input type='search' id='barcode' name='barcode' autofocus='autofocus' autocomplete='off'>
+		<label for='search'>Search Barcode or Serial</label><br>
+		<input type='search' id='search' name='search' autofocus='autofocus' autocomplete='off'>
 		</form>";
 } else {
 	echo "Error creating record: " . $link->error;
 	echo "<form action='index.php' method='post'>
-		<label for='barcode'>Scan Barcode</label><br>
-		<input type='search' id='barcode' name='barcode' autofocus='autofocus' autocomplete='off'>
+		<label for='search'>Search Barcode or Serial</label><br>
+		<input type='search' id='search' name='search' autofocus='autofocus' autocomplete='off'>
 		</form>";
 }
 

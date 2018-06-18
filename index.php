@@ -9,20 +9,25 @@
 
 <?php
 
-if (empty($_POST["barcode"])){
+
+$search = htmlspecialchars("$_POST[search]");
+
+// $_POST["search"]
+
+if (empty($search)){
 
    echo "<form action='$_SERVER[PHP_SELF]' method='post'>
-		<label for='barcode'>Scan Barcode</label><br>
-		<input type='search' id='barcode' name='barcode' autofocus='autofocus' autocomplete='off'>
+		<label for='search'>Search Barcode or Serial</label><br>
+		<input type='search' id='search' name='search' autofocus='autofocus' autocomplete='off'>
 		</form>";
 	} else {
 
 
-$cardinfo = htmlspecialchars("$_POST[barcode]"); //grabs the input of the form named "barcode" and saves it to the $cardinfo variable
+$cardinfo = htmlspecialchars("$_POST[search]"); //grabs the input of the form named "barcode" and saves it to the $cardinfo variable
 
 include 'connection.php';
 
-$sql = "SELECT barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes FROM items WHERE barcode LIKE '$cardinfo'";
+$sql = "SELECT barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes FROM items WHERE (barcode LIKE '$cardinfo' OR serial LIKE '$cardinfo')";
 $result = $link->query($sql);
 if ($result->num_rows > 0){
 	while ($row = $result->fetch_assoc()) {
@@ -81,6 +86,8 @@ echo "<h1> Editing Record for " . $barcode . "</h1>
 <input type='reset'>
 </form>";
 } else {
+
+	
 echo "<h1> Creating Record for " . $cardinfo . "</h1>
 <form action='create.php' method='post'>
 <input type='hidden' id='barcode' name='barcode' value='$cardinfo'  autocomplete='off'><br>
