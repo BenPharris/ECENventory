@@ -9,15 +9,15 @@
 
 <?php
 
-$search = htmlspecialchars($_POST["search"]); //grabs the input of the form named "search" and saves it to the $search variable
+include 'searchform.php'; //defines searchform() function
 
-if (empty($search)){
+// $search = htmlspecialchars("$_POST[search]"); //grabs the input of the form named "search" and saves it to the $search variable
+if (!isset($_POST['search'])){
 
-   echo "<form action='$_SERVER[PHP_SELF]' method='post'>
-		<label for='search'>Search Barcode or Serial</label><br>
-		<input type='search' id='search' name='search' autofocus='autofocus' autocomplete='off'>
-		</form>";
-	} else {
+//call search form sending back to index.php (php_self)
+searchform($_SERVER['PHP_SELF']);
+
+} else {
 
 $search = htmlspecialchars("$_POST[search]"); //grabs the input of the form named "search" and saves it to the $search variable
 
@@ -41,6 +41,7 @@ if ($result->num_rows > 0){
 		$notes = $row["notes"];
 		}
 
+//generate the form for EDITING then call edit.php
 echo "<h1> Editing Record for " . $barcode . "</h1>
 <form action='edit.php' method='post'>
 <input type='hidden' id='barcode' name='barcode' value='$barcode'  autocomplete='off'><br>
@@ -83,6 +84,8 @@ echo "<h1> Editing Record for " . $barcode . "</h1>
 </form>";
 } else {
 
+
+//checks to see if $search is 8 digits with regex. If so, lock barcode. If not, lock serial.
 if (preg_match('/^\d{8}$/',$search)) {
 	$titletext = "Barcode";
 	$barcodereadonly = "readonly='readonly'";
@@ -102,10 +105,8 @@ if (preg_match('/^\d{8}$/',$search)) {
 	$barcodelabel = "";
 }
 
-//code to check whether $search is a barcode or a serial goes here
-//include logic in this part of the form to post $search either into 'barcode' or 'serial'
 
-
+//generate the form for CREATION then call create.php
 echo "<h1> Creating Record for " . $titletext . " " . $search . "</h1>
 <form action='create.php' method='post'>
 <input type='text' id='barcode' name='barcode' value='$barcodesearch' autocomplete='off' $barcodereadonly>
