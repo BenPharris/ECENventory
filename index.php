@@ -9,10 +9,7 @@
 
 <?php
 
-
-$search = htmlspecialchars("$_POST[search]");
-
-// $_POST["search"]
+$search = htmlspecialchars($_POST["search"]); //grabs the input of the form named "search" and saves it to the $search variable
 
 if (empty($search)){
 
@@ -22,12 +19,11 @@ if (empty($search)){
 		</form>";
 	} else {
 
-
-$cardinfo = htmlspecialchars("$_POST[search]"); //grabs the input of the form named "barcode" and saves it to the $cardinfo variable
+$search = htmlspecialchars("$_POST[search]"); //grabs the input of the form named "search" and saves it to the $search variable
 
 include 'connection.php';
 
-$sql = "SELECT barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes FROM items WHERE (barcode LIKE '$cardinfo' OR serial LIKE '$cardinfo')";
+$sql = "SELECT barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes FROM items WHERE (barcode LIKE '$search' OR serial LIKE '$search')";
 $result = $link->query($sql);
 if ($result->num_rows > 0){
 	while ($row = $result->fetch_assoc()) {
@@ -87,13 +83,33 @@ echo "<h1> Editing Record for " . $barcode . "</h1>
 </form>";
 } else {
 
-//code to check whether $cardinfo is a barcode or a serial goes here
-//include logic in this part of the form to post cardinfo either into 'barcode' or 'serial'
+if (preg_match('/^\d{8}$/',$search)) {
+	$titletext = "Barcode";
+	$barcodereadonly = "readonly='readonly'";
+	$serialreadonly = "";
+	$barcodesearch = $search;
+	$serialsearch = "";
+	$barcodelabel = "(Read Only)";
+	$seriallabel = "";
+
+} else {
+	$titletext = "Serial";
+	$serialreadonly = "readonly='readonly'";
+	$barcodereadonly = "";
+	$serialsearch = $search;
+	$barcodesearch = "";
+	$seriallabel = "(Read Only)";
+	$barcodelabel = "";
+}
+
+//code to check whether $search is a barcode or a serial goes here
+//include logic in this part of the form to post $search either into 'barcode' or 'serial'
 
 
-echo "<h1> Creating Record for " . $cardinfo . "</h1>
+echo "<h1> Creating Record for " . $titletext . " " . $search . "</h1>
 <form action='create.php' method='post'>
-<input type='hidden' id='barcode' name='barcode' value='$cardinfo'  autocomplete='off'><br>
+<input type='text' id='barcode' name='barcode' value='$barcodesearch' autocomplete='off' $barcodereadonly>
+<label for='barcode'>Barcode $barcodelabel</label><br>
 
 <input type='text' id='type' name='type' maxlength='70' autocomplete='off'>
 <label for='type'>Type</label><br>
@@ -110,8 +126,8 @@ echo "<h1> Creating Record for " . $cardinfo . "</h1>
 <input type='text' id='user' name='user' maxlength='70' autocomplete='off'>
 <label for='user'>User/Lab</label><br>
 
-<input type='text' id='serial' name='serial' maxlength='70' autocomplete='off'>
-<label for='serial'>Serial</label><br>
+<input type='text' id='serial' name='serial' value = '$serialsearch' maxlength='70' autocomplete='off' $serialreadonly>
+<label for='serial'>Serial $seriallabel</label><br>
 
 <input type='date' id='warranty_start' name='warranty_start' maxlength='70' autocomplete='off'>
 <label for='warranty_start'>Warranty Start</label><br>
