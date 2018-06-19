@@ -8,21 +8,13 @@
 <body>
 
 <?php
-$barcode = htmlspecialchars($_POST['barcode']);
-$type = htmlspecialchars($_POST['type']);
-$manufacturer = htmlspecialchars($_POST['manufacturer']);
-$model = htmlspecialchars($_POST['model']);
-$location = htmlspecialchars($_POST['location']);
-$user = htmlspecialchars($_POST['user']);
-$serial = htmlspecialchars($_POST['serial']);
-$warranty_start = htmlspecialchars($_POST['warranty_start']);
-$warranty_end = htmlspecialchars($_POST['warranty_end']);
-$speedtype = htmlspecialchars($_POST['speedtype']);
-$description = htmlspecialchars($_POST['description']);
-$notes = htmlspecialchars($_POST['notes']);
+include 'searchform.php'; //defines searchform() function
 
-include 'connection.php';
+include 'grabpost.php'; // grabs all post data and assigns to variables
 
+include 'connection.php'; //connects to mysql
+
+//prepares Update query
 $sql = "UPDATE items SET 
 	type = '$type',
 	manufacturer='$manufacturer', 
@@ -37,20 +29,18 @@ $sql = "UPDATE items SET
 	notes='$notes' 
 	WHERE barcode=$barcode";
 
+
+//executes insert statement if link is good. Otherwise errors. Then brings up search form again.
 if ($link->query($sql) === TRUE) {
 	echo "Success!";
-	echo "<form action='index.php' method='post'>
-		<label for='search'>Search Barcode or Serial</label><br>
-		<input type='search' id='search' name='search' autofocus='autofocus' autocomplete='off'>
-		</form>";
 } else {
 	echo "Error updating record: " . $link->error;
-	echo "<form action='index.php' method='post'>
-		<label for='search'>Search Barcode or Serial</label><br>
-		<input type='search' id='search' name='search' autofocus='autofocus' autocomplete='off'>
-		</form>";
 }
 
+//brings up the search form again
+searchform();
+
+//closes our mysql connection
 $link->close();
 ?>
 
