@@ -23,9 +23,10 @@ $search = htmlspecialchars("$_POST[search]"); //grabs the input of the form name
 
 include 'connection.php';
 
-$sql = "SELECT barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes FROM items WHERE (barcode LIKE '$search' OR serial LIKE '$search')";
+$sql = "SELECT barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes FROM items WHERE (barcode LIKE '%$search%' OR serial LIKE '%$search%')";
 $result = $link->query($sql);
-if ($result->num_rows > 0){
+
+if ($result->num_rows === 1){ //if only one result is returned, assign it to the variables below 
 	while ($row = $result->fetch_assoc()) {
 		$barcode = $row["barcode"];
 		$type = $row["type"];
@@ -82,8 +83,7 @@ echo "<h1> Editing Record for " . $barcode . "</h1>
 <input type='submit' value='Update'>
 <input type='reset'>
 </form>";
-} else {
-
+} elseif ($result->num_rows < 1) {
 
 //checks to see if $search is 8 digits with regex. If so, lock barcode. If not, lock serial.
 if (preg_match('/^\d{8}$/',$search)) {
@@ -94,8 +94,11 @@ if (preg_match('/^\d{8}$/',$search)) {
 	$serialsearch = "";
 	$barcodelabel = "(Read Only)";
 	$seriallabel = "";
+	$barcode000 = "";
 
 } else {
+	
+
 	$titletext = "Serial";
 	$serialreadonly = "readonly='readonly'";
 	$barcodereadonly = "";
@@ -103,11 +106,13 @@ if (preg_match('/^\d{8}$/',$search)) {
 	$barcodesearch = "";
 	$seriallabel = "(Read Only)";
 	$barcodelabel = "";
+	$barcode000 = "For virtual barcodes, use 000- prefix";
 }
 
 
 //generate the form for CREATION then call create.php
 echo "<h1> Creating Record for " . $titletext . " " . $search . "</h1>
+<h2> $barcode000 </h2>
 <form action='create.php' method='post'>
 <input type='text' id='barcode' name='barcode' value='$barcodesearch' autocomplete='off' $barcodereadonly>
 <label for='barcode'>Barcode $barcodelabel</label><br>
@@ -147,10 +152,22 @@ echo "<h1> Creating Record for " . $titletext . " " . $search . "</h1>
 
 <input type='submit' value='Create'>
 </form>";
-}
-$link->close();
+} elseif ($result->num_rows < 20)  {
+echo "<h1>Choose an item:</h1>";
+	while ($row = $result->fetch_assoc()) {
+		$barcode = $row["barcode"];
+		echo "<div class='result'>" . $row['type'] . " " . $row['manufacturer'] . " " . $row['model'] . " " . $row['location'] . " " . $row['user'] . " " . $row['serial'] . " " . $row['warranty_start'] . " " . $row['warranty_end'] . " " . $row['speedtype'] . " " . $row['description'] . " " . $row['notes'];
+		searchform('index.php',"$barcode","");
+		echo "</div><br>";
+	} 
+
+} else {
+	searchform('index.php', $search, '<label for=\'search\'>Too many results. Try again.</label><br>');
 }
 
+$link->close();
+
+}
 ?>
 
 </body>
