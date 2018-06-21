@@ -5,7 +5,6 @@
 	<link href="./style.css" type="text/css" rel="stylesheet">
 	<link rel="icon" type="image/png" href="./searchicon.png">
 </head>
-<body>
 
 <?php
 
@@ -16,7 +15,7 @@ include 'searchform.php'; //defines searchform() function
 if (!isset($_POST['search'])){
 
 //call search form sending back to index.php (php_self)
-searchform($_SERVER['PHP_SELF']);
+searchform($_SERVER['PHP_SELF'],"","");
 
 } else {
 
@@ -61,7 +60,7 @@ if ($num_results === 1){ //if only one result is returned, assign it to the vari
 		}
 
 //generate the form for EDITING then call edit.php
-echo "<h1> Editing Record for " . $barcode . "</h1>";
+echo "<div class='header'><h1> Editing Record for " . $barcode . "</h1></div>";
 
 
 //sets the variables necessary in fullform.php. Most are specified above by pulling from mysql
@@ -105,8 +104,8 @@ if (preg_match('/^\d{8}$/',$search)) {
 
 }
 
-echo "<h1> Creating Record for " . $titletext . " " . $search . "</h1>
-<h2> $barcode000 </h2>";
+echo "<div class='header'><h1> Creating Record for " . $titletext . " " . $search . "</h1>
+<h2> $barcode000 </h2></div>";
 
 //sets variables for fullform.php. Most are empty because we're CREATING
 $type = "";
@@ -132,14 +131,16 @@ echo "<div class='searchpage'>";
 	while ($row = $result->fetch_assoc()) {
 		$barcode = $row["barcode"];
 		echo "<div class='result'>" . $row['type'] . " | " . $row['manufacturer'] . " | " . $row['model'] . " | " . $row['location'] . " | " . $row['user'] . " | " . $row['serial'] . " | " . $row['warranty_start'] . " | " . $row['warranty_end'] . " | " . $row['speedtype'] . " | " . $row['description'] . " | " . $row['notes'];
-		searchform('index.php',"$barcode","","hidden");
+		searchform('index.php',$barcode,"","hidden","Edit");
 		echo "</div>";
 	} 
 echo "</div>";
-echo "<a href=\"javascript:history.go(-1)\">GO BACK</a>";
+
+include 'backbutton.php';
 
 } else {
-	searchform('index.php', $search, '<label for=\'search\'>Too many results ($num_results). Try again.</label><br>');
+	searchform('index.php', $search, '<label for=\'search\'>Too many results. Try again.</label><br>');
+	echo "<p>(Found " . $num_results . " results)</p>";
 }
 
 $link->close();
@@ -147,5 +148,4 @@ $link->close();
 }
 ?>
 
-</body>
 </html>
