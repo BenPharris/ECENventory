@@ -1,12 +1,24 @@
-body{
-	background-color: white;
-	color: grey;
+.wholepage {
+
+
+}
+
+.content {
+
+}
+
+.header{
+	background-color: lightgreen;
+	width: 60%;
+	padding: 5px 12px;
+	margin: 8px 0;
+	text-align: center;
+	border-radius: 4px;
 }
 
 h1 {
 	font-family: sans-serif;
 	color: grey;
-	line-height: .5em;
 }
 
 h2 {
@@ -20,6 +32,7 @@ p {
 }
 
 .searchpage {
+	width: 60%;
 	display: grid;
     grid-template-columns:25% 25% 25% 25%;
     grid-gap: 10px;
@@ -38,36 +51,38 @@ p {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
+.searchbox {
+	width: 250px;
+}
+
 
 label {
+	grid-column: 1/2;
 	font-family: sans-serif;
 	color: grey;
+	float: center;
+	padding-right: 24px;
 }
 
 input[type=search]{
 	background-image: url('./searchicon.png');
 	background-size: 20px 20px;
-	background-position: 3px 12px;
+	background-position: 3px 5px;
 	background-repeat: no-repeat;
 	padding-left: 25px;
 	background-color: lightgrey;
 }
 
 input[type=date]{
-	font-family: Arial
-}
-
-input[type=longtext]{
-	-webkit-transition: width 0.4s ease-in-out;
-	transition: width 0.4s ease-in-out;
-}
-
-input[type=longtext]:focus{
-	width: 50%;
+	font-family: sans-serif;
 }
 
 input[type=submit]{
+	float: left;
+	text-align: center;
 	width: 110px;
+	padding: 5px 5px;
+	margin: 3px 3px;
 	background-color:green;
 	border: none;
 	font-size: larger;
@@ -75,20 +90,58 @@ input[type=submit]{
 }
 
 input[type=reset]{
+	float: left;
+	text-align: center;
 	width: 90px;
+	padding: 5px 5px;
+	margin: 3px 3px;
 	background-color:orange;
 	border: none;
 	font-size: larger;
 	color: grey;
 }
 
-input {
-	width: 300px;
-	padding: 12px 20px;
-	margin: 8px 0;
+
+.fullform {
+	width: 60%;
+	display: grid;
+    grid-template-columns:33% 33%;
+    grid-gap: 20px;
+
+}
+
+
+.editlongtext {
+	padding: 5px;
+	margin: 3px;
 	box-sizing: border-box;
+	border-radius: 4px;
+	outline: none;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	font-family: sans-serif;
+	color: grey;
+	display: block;
+}
+
+
+.editinput {
+
+	padding: 5px;
+	margin: 3px;
+	box-sizing: border-box;
+	border-radius: 4px;
+	outline: none;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	font-family: sans-serif;
+	color: grey;
+}
+
+
+input {
+	width: 100%;
 	border-bottom: 2px solid lightgreen;
 	border-radius: 4px;
+	padding: 5px 5px;
 	outline: none;
 	background-color: lightgrey;
 	color: black;
@@ -99,3 +152,22 @@ input:focus{
 	background-color: lightgreen;
 }
 
+.backbutton {
+	display: block;
+	text-align: center;
+	float: left;
+	width: 50px;
+	padding: 5px 5px;
+	margin: 3px 3px;
+	border: none;
+	border-radius: 4px;
+	outline: none;
+	background-color: lightblue;
+}
+
+a {
+	text-decoration: none;
+	font-size: larger;
+	font-family: sans-serif;
+	color: grey;
+}
