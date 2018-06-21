@@ -40,8 +40,10 @@ $sql = "SELECT barcode, type, manufacturer, model, location, user, serial, warra
 )";
 
 $result = $link->query($sql);
+$num_results = $result->num_rows;
 
-if ($result->num_rows === 1){ //if only one result is returned, assign it to the variables below 
+
+if ($num_results === 1){ //if only one result is returned, assign it to the variables below 
 	while ($row = $result->fetch_assoc()) {
 		$barcode = $row["barcode"];
 		$type = $row["type"];
@@ -98,7 +100,7 @@ echo "<h1> Editing Record for " . $barcode . "</h1>
 <input type='submit' value='Update'>
 <input type='reset'>
 </form>";
-} elseif ($result->num_rows < 1) {
+} elseif ($num_results < 1) {
 
 //checks to see if $search is 8 digits with regex. If so, lock barcode. If not, lock serial.
 if (preg_match('/^\d{8}$/',$search)) {
@@ -167,17 +169,20 @@ echo "<h1> Creating Record for " . $titletext . " " . $search . "</h1>
 
 <input type='submit' value='Create'>
 </form>";
-} elseif ($result->num_rows < 20)  {
-echo "<h1>Choose an item:</h1>";
+} elseif ($num_results < 40)  {
+echo "<h1>Choose from $num_results items:</h1>";
+echo "<div class='searchpage'>";
 	while ($row = $result->fetch_assoc()) {
 		$barcode = $row["barcode"];
-		echo "<div class='result'>" . $row['type'] . " " . $row['manufacturer'] . " " . $row['model'] . " " . $row['location'] . " " . $row['user'] . " " . $row['serial'] . " " . $row['warranty_start'] . " " . $row['warranty_end'] . " " . $row['speedtype'] . " " . $row['description'] . " " . $row['notes'];
-		searchform('index.php',"$barcode","");
-		echo "</div><br>";
+		echo "<div class='result'>" . $row['type'] . " | " . $row['manufacturer'] . " | " . $row['model'] . " | " . $row['location'] . " | " . $row['user'] . " | " . $row['serial'] . " | " . $row['warranty_start'] . " | " . $row['warranty_end'] . " | " . $row['speedtype'] . " | " . $row['description'] . " | " . $row['notes'];
+		searchform('index.php',"$barcode","","hidden");
+		echo "</div>";
 	} 
+echo "</div>";
+echo "<a href=\"javascript:history.go(-1)\">GO BACK</a>";
 
 } else {
-	searchform('index.php', $search, '<label for=\'search\'>Too many results. Try again.</label><br>');
+	searchform('index.php', $search, '<label for=\'search\'>Too many results ($num_results). Try again.</label><br>');
 }
 
 $link->close();
