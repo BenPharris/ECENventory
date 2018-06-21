@@ -140,8 +140,8 @@ echo "</div>";
 include 'backbutton.php';
 
 } else {
-	searchform('index.php', $search, '<label for=\'search\'>Too many results. Try again.</label><br>');
-	echo "<p>(Found " . $num_results . " results)</p>";
+	searchform('index.php', $search, '');
+	echo "<div>Too many results: (Found " . $num_results . " results)</div>";
 }
 
 $link->close();

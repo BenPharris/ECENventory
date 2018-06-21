@@ -26,15 +26,20 @@ h2 {
 	color: grey;
 }
 
-p {
+div {
 	font-family: sans-serif;
 	color: grey;
+}
+
+.searchbox {
+	float:left;
+	width: 100%;
 }
 
 .searchpage {
 	width: 60%;
 	display: grid;
-    grid-template-columns:25% 25% 25% 25%;
+    grid-template-columns:33% 33% 33%;
     grid-gap: 10px;
 }
 
@@ -45,15 +50,14 @@ p {
 	font-family: sans-serif;
 	color: grey;
 	padding: 10px;
+	text-align: center;
 }
 
 .result:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.searchbox {
-	width: 250px;
-}
+
 
 
 label {
@@ -121,6 +125,8 @@ input[type=reset]{
 	font-family: sans-serif;
 	color: grey;
 	display: block;
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
 }
 
 
@@ -138,7 +144,7 @@ input[type=reset]{
 
 
 input {
-	width: 100%;
+	width: 95%;
 	border-bottom: 2px solid lightgreen;
 	border-radius: 4px;
 	padding: 5px 5px;
@@ -149,6 +155,7 @@ input {
 }
 
 input:focus{
+	width: 1000px;
 	background-color: lightgreen;
 }
 
