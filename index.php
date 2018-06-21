@@ -23,7 +23,22 @@ $search = htmlspecialchars("$_POST[search]"); //grabs the input of the form name
 
 include 'connection.php';
 
-$sql = "SELECT barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes FROM items WHERE (barcode LIKE '%$search%' OR serial LIKE '%$search%')";
+$sql = "SELECT barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes FROM items WHERE 
+(
+	barcode LIKE '%$search%' 
+	OR type LIKE '%$search%'
+	OR manufacturer LIKE '%$search%'
+	OR model LIKE '%$search%'
+	OR location LIKE '%$search%'
+	OR user LIKE '%$search%'
+	OR serial LIKE '%$search%'
+	OR warranty_start LIKE '%$search%'
+	OR warranty_end LIKE  '%$search%'
+	OR speedtype LIKE  '%$search%'
+	OR description LIKE  '%$search%'
+	OR notes LIKE  '%$search%'
+)";
+
 $result = $link->query($sql);
 
 if ($result->num_rows === 1){ //if only one result is returned, assign it to the variables below 
