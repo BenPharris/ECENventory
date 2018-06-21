@@ -11,6 +11,7 @@
 
 include 'searchform.php'; //defines searchform() function
 
+
 // $search = htmlspecialchars("$_POST[search]"); //grabs the input of the form named "search" and saves it to the $search variable
 if (!isset($_POST['search'])){
 
@@ -40,8 +41,10 @@ $sql = "SELECT barcode, type, manufacturer, model, location, user, serial, warra
 )";
 
 $result = $link->query($sql);
+$num_results = $result->num_rows;
 
-if ($result->num_rows === 1){ //if only one result is returned, assign it to the variables below 
+
+if ($num_results === 1){ //if only one result is returned, assign it to the variables below 
 	while ($row = $result->fetch_assoc()) {
 		$barcode = $row["barcode"];
 		$type = $row["type"];
@@ -58,126 +61,85 @@ if ($result->num_rows === 1){ //if only one result is returned, assign it to the
 		}
 
 //generate the form for EDITING then call edit.php
-echo "<h1> Editing Record for " . $barcode . "</h1>
-<form action='edit.php' method='post'>
-<input type='hidden' id='barcode' name='barcode' value='$barcode'  autocomplete='off'><br>
+echo "<h1> Editing Record for " . $barcode . "</h1>";
 
-<input type='text' id='type' name='type' value='$type' maxlength='70' autocomplete='off'>
-<label for='type'>Type</label><br>
 
-<input type='text' id='manufacturer' name='manufacturer' value='$manufacturer' maxlength='70' autocomplete='off'>
-<label for='manufacturer'>Manufacturer</label><br>
+//sets the variables necessary in fullform.php. Most are specified above by pulling from mysql
+$barcodelabel = "(Read Only)"; 
+$seriallabel = "";
+$barcodereadonly = "readonly='readonly'";
+$serialreadonly = "";
 
-<input type='text' id='model' name='model' value='$model' maxlength='70' autocomplete='off'>
-<label for='model'>Model</label><br>
+$destination = 'edit.php';
+$buttonlabel = "Update";
 
-<input type='text' id='location' name='location' value='$location' maxlength='70' autocomplete='off'>
-<label for='location'>Location</label><br>
+include 'fullform.php';
 
-<input type='text' id='user' name='user' value='$user' maxlength='70' autocomplete='off'>
-<label for='user'>User/Lab</label><br>
-
-<input type='text' id='serial' name='serial' value='$serial' maxlength='70' autocomplete='off'>
-<label for='serial'>Serial</label><br>
-
-<input type='date' id='warranty_start' name='warranty_start' value='$warranty_start' maxlength='70' autocomplete='off'>
-<label for='warranty_start'>Warranty Start</label><br>
-
-<input type='date' id='warranty_end' name='warranty_end' value='$warranty_end' maxlength='70' autocomplete='off'>
-<label for='warranty_end'>Warranty End</label><br>
-
-<input type='number' id='speedtype' name='speedtype' value='$speedtype' maxlength='9' autocomplete='off'>
-<label for='speedtype'>Speedtype</label><br>
-
-<input type='longtext' id='description' name='description' value='$description' maxlength='255' autocomplete='off'>
-<label for='description'>Description</label><br>
-
-<input type='longtext' id='notes' name='notes' value='$notes' maxlength='2048' autocomplete='off'>
-<label for='notes'>Notes</label><br>
-
-<input type='submit' value='Update'>
-<input type='reset'>
-</form>";
-} elseif ($result->num_rows < 1) {
+} elseif ($num_results < 1) {
 
 //checks to see if $search is 8 digits with regex. If so, lock barcode. If not, lock serial.
 if (preg_match('/^\d{8}$/',$search)) {
+	
+	//If barcode is specified, fill out the barcode and make it readonly
 	$titletext = "Barcode";
 	$barcodereadonly = "readonly='readonly'";
 	$serialreadonly = "";
-	$barcodesearch = $search;
-	$serialsearch = "";
+	$barcode = $search;
 	$barcodelabel = "(Read Only)";
 	$seriallabel = "";
 	$barcode000 = "";
+	$serial = "";
 
 } else {
 	
-
+	//If serial is specified, fill out the serial number and make it readonly
 	$titletext = "Serial";
 	$serialreadonly = "readonly='readonly'";
 	$barcodereadonly = "";
-	$serialsearch = $search;
-	$barcodesearch = "";
+	$serial = $search;
 	$seriallabel = "(Read Only)";
 	$barcodelabel = "";
 	$barcode000 = "For virtual barcodes, use 000- prefix";
+	$barcode = "";
+
+
 }
 
-
-//generate the form for CREATION then call create.php
 echo "<h1> Creating Record for " . $titletext . " " . $search . "</h1>
-<h2> $barcode000 </h2>
-<form action='create.php' method='post'>
-<input type='text' id='barcode' name='barcode' value='$barcodesearch' autocomplete='off' $barcodereadonly>
-<label for='barcode'>Barcode $barcodelabel</label><br>
+<h2> $barcode000 </h2>";
 
-<input type='text' id='type' name='type' maxlength='70' autocomplete='off'>
-<label for='type'>Type</label><br>
+//sets variables for fullform.php. Most are empty because we're CREATING
+$type = "";
+$manufacturer = "";
+$model = "";
+$location = "";
+$user = "";
+$warranty_start = "";
+$warranty_end = "";
+$speedtype = "";
+$description = "";
+$notes = "";
 
-<input type='text' id='manufacturer' name='manufacturer' maxlength='70' autocomplete='off'>
-<label for='manufacturer'>Manufacturer</label><br>
+$destination = 'create.php'; //sending the form to create.php
+$buttonlabel = "Create";
 
-<input type='text' id='model' name='model' maxlength='70' autocomplete='off'>
-<label for='model'>Model</label><br>
+include 'fullform.php'; //actually generate the form with the variables filled in
 
-<input type='text' id='location' name='location' maxlength='70' autocomplete='off'>
-<label for='location'>Location</label><br>
+} elseif ($num_results < 40)  {
 
-<input type='text' id='user' name='user' maxlength='70' autocomplete='off'>
-<label for='user'>User/Lab</label><br>
-
-<input type='text' id='serial' name='serial' value = '$serialsearch' maxlength='70' autocomplete='off' $serialreadonly>
-<label for='serial'>Serial $seriallabel</label><br>
-
-<input type='date' id='warranty_start' name='warranty_start' maxlength='70' autocomplete='off'>
-<label for='warranty_start'>Warranty Start</label><br>
-
-<input type='date' id='warranty_end' name='warranty_end' maxlength='70' autocomplete='off'>
-<label for='warranty_end'>Warranty End</label><br>
-
-<input type='number' id='speedtype' name='speedtype' maxlength='9' autocomplete='off'>
-<label for='speedtype'>Speedtype</label><br>
-
-<input type='longtext' id='description' name='description' maxlength='255' autocomplete='off'>
-<label for='description'>Description</label><br>
-
-<input type='longtext' id='notes' name='notes' maxlength='2048' autocomplete='off'>
-<label for='notes'>Notes</label><br>
-
-<input type='submit' value='Create'>
-</form>";
-} elseif ($result->num_rows < 20)  {
-echo "<h1>Choose an item:</h1>";
+echo "<h1>Choose from $num_results items:</h1>";
+echo "<div class='searchpage'>";
 	while ($row = $result->fetch_assoc()) {
 		$barcode = $row["barcode"];
-		echo "<div class='result'>" . $row['type'] . " " . $row['manufacturer'] . " " . $row['model'] . " " . $row['location'] . " " . $row['user'] . " " . $row['serial'] . " " . $row['warranty_start'] . " " . $row['warranty_end'] . " " . $row['speedtype'] . " " . $row['description'] . " " . $row['notes'];
-		searchform('index.php',"$barcode","");
-		echo "</div><br>";
+		echo "<div class='result'>" . $row['type'] . " | " . $row['manufacturer'] . " | " . $row['model'] . " | " . $row['location'] . " | " . $row['user'] . " | " . $row['serial'] . " | " . $row['warranty_start'] . " | " . $row['warranty_end'] . " | " . $row['speedtype'] . " | " . $row['description'] . " | " . $row['notes'];
+		searchform('index.php',"$barcode","","hidden");
+		echo "</div>";
 	} 
+echo "</div>";
+echo "<a href=\"javascript:history.go(-1)\">GO BACK</a>";
 
 } else {
-	searchform('index.php', $search, '<label for=\'search\'>Too many results. Try again.</label><br>');
+	searchform('index.php', $search, '<label for=\'search\'>Too many results ($num_results). Try again.</label><br>');
 }
 
 $link->close();
