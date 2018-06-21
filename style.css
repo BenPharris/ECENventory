@@ -1,10 +1,19 @@
+.wholepage {
+
+
+}
+
+.content {
+
+}
+
 .header{
 	background-color: lightgreen;
-	width: 50%;
+	width: 60%;
 	padding: 5px 12px;
 	margin: 8px 0;
 	text-align: center;
-	border-radius: 5px;
+	border-radius: 4px;
 }
 
 h1 {
@@ -23,6 +32,7 @@ p {
 }
 
 .searchpage {
+	width: 60%;
 	display: grid;
     grid-template-columns:25% 25% 25% 25%;
     grid-gap: 10px;
@@ -42,13 +52,16 @@ p {
 }
 
 .searchbox {
-
+	width: 250px;
 }
 
 
 label {
+	grid-column: 1/2;
 	font-family: sans-serif;
 	color: grey;
+	float: center;
+	padding-right: 24px;
 }
 
 input[type=search]{
@@ -61,23 +74,15 @@ input[type=search]{
 }
 
 input[type=date]{
-	font-family: Arial
-}
-
-input[type=longtext]{
-	-webkit-transition: width 0.4s ease-in-out;
-	transition: width 0.4s ease-in-out;
-}
-
-input[type=longtext]:focus{
-	width: 90%;
+	font-family: sans-serif;
 }
 
 input[type=submit]{
+	float: left;
 	text-align: center;
 	width: 110px;
 	padding: 5px 5px;
-	margin: 3px 20px;
+	margin: 3px 3px;
 	background-color:green;
 	border: none;
 	font-size: larger;
@@ -85,55 +90,62 @@ input[type=submit]{
 }
 
 input[type=reset]{
+	float: left;
 	text-align: center;
 	width: 90px;
 	padding: 5px 5px;
+	margin: 3px 3px;
 	background-color:orange;
 	border: none;
 	font-size: larger;
 	color: grey;
 }
 
-input {
-	padding: 5px 12px;
-	margin: 8px 0;
+
+.fullform {
+	width: 60%;
+	display: grid;
+    grid-template-columns:33% 33%;
+    grid-gap: 20px;
+
+}
+
+
+.editlongtext {
+	padding: 5px;
+	margin: 3px;
 	box-sizing: border-box;
+	border-radius: 4px;
+	outline: none;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	font-family: sans-serif;
+	color: grey;
+	display: block;
+}
+
+
+.editinput {
+
+	padding: 5px;
+	margin: 3px;
+	box-sizing: border-box;
+	border-radius: 4px;
+	outline: none;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	font-family: sans-serif;
+	color: grey;
+}
+
+
+input {
+	width: 100%;
 	border-bottom: 2px solid lightgreen;
 	border-radius: 4px;
+	padding: 5px 5px;
 	outline: none;
 	background-color: lightgrey;
 	color: black;
 	font-size: large;
-}
-
-.fullform {
-	display: grid;
-    grid-template-columns:50% 50%;
-    grid-gap: 10px;
-}
-
-.editinput {
-	padding: 5px 12px;
-	margin: 3px 0px;
-	box-sizing: border-box;
-	border-radius: 4px;
-	outline: none;
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-	font-family: sans-serif;
-	color: grey;
-}
-
-.editlongtext {
-	padding: 5px 12px;
-	margin: 3px 0px;
-	box-sizing: border-box;
-	border-radius: 4px;
-	outline: none;
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-	font-family: sans-serif;
-	color: grey;
-	-webkit-transition: width 0.4s ease-in-out;
-	transition: width 0.4s ease-in-out;
 }
 
 input:focus{
@@ -143,9 +155,10 @@ input:focus{
 .backbutton {
 	display: block;
 	text-align: center;
+	float: left;
 	width: 50px;
 	padding: 5px 5px;
-	margin: 3px 20px;
+	margin: 3px 3px;
 	border: none;
 	border-radius: 4px;
 	outline: none;

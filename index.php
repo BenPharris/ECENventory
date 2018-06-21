@@ -5,7 +5,8 @@
 	<link href="./style.css" type="text/css" rel="stylesheet">
 	<link rel="icon" type="image/png" href="./searchicon.png">
 </head>
-
+<div class='wholepage'>
+	<div class = 'content'>
 <?php
 
 include 'searchform.php'; //defines searchform() function
@@ -126,7 +127,7 @@ include 'fullform.php'; //actually generate the form with the variables filled i
 
 } elseif ($num_results < 40)  {
 
-echo "<h1>Choose from $num_results items:</h1>";
+echo "<div class='header'><h1>Choose from $num_results items:</h1></div>";
 echo "<div class='searchpage'>";
 	while ($row = $result->fetch_assoc()) {
 		$barcode = $row["barcode"];
@@ -147,5 +148,7 @@ $link->close();
 
 }
 ?>
+</div>
+</div>
 
 </html>
