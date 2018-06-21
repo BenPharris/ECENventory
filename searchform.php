@@ -6,9 +6,9 @@ function searchform($destination = 'index.php', $auto = '', $title = '<label for
 		<form action='$destination' method='post'>
 		$title
 		<input type='$ishidden' id='search' name='search' autofocus='autofocus' value='$auto' autocomplete='off'>
+		</div>
 		<input type='submit' value='$buttonlabel'>
-		</form>
-		</div>";
+		</form>";
 }
 
 ?>
