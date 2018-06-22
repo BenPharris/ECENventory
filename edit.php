@@ -6,8 +6,8 @@
 	<link rel="icon" type="image/png" href="./searchicon.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
-
+<div class='wholepage'>
+	<div class = 'content'>
 <?php
 include 'searchform.php'; //defines searchform() function
 
@@ -33,7 +33,7 @@ $sql = "UPDATE items SET
 
 //executes insert statement if link is good. Otherwise errors. Then brings up search form again.
 if ($link->query($sql) === TRUE) {
-	echo "<div class = 'header'><h1>Success!</h1></div>";
+	echo "<div class = 'header'><h1>Success!</h1><h2>Editing Record " . $barcode . "</div>";
 } else {
 	echo "<div class = 'header><h1>Error updating record:</h1><h2>" . $link->error . "</h2></div>";
 }
@@ -44,6 +44,7 @@ searchform('index.php','','');
 //closes our mysql connection
 $link->close();
 ?>
+</div>
+</div>
 
-</body>
 </html>
