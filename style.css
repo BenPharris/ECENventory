@@ -50,6 +50,7 @@ div {
 	color: rgb(86, 90, 92);
 	padding: 5px;
 	text-align: center;
+	overflow:hidden;
 }
 
 
@@ -67,7 +68,7 @@ div {
 }
 
 .resulttable {
-
+	width: 100%;
 	text-align: left;
 }
 
@@ -202,6 +203,30 @@ a {
 	font-family: sans-serif;
 	color: rgb(86, 90, 92);
 }
+
+/* this is the responsive part of the stylesheet */
+
+@media screen and (max-width: 1500px) and (min-width: 1200px) {
+    .wholepage {
+        width: 80%;
+    }
+}
+
+
+@media screen and (max-width: 1200px) and (min-width: 600px) {
+    .wholepage {
+        width: 100%;
+    }
+
+    .searchpage {
+        grid-template-columns:50% 50%;
+    }
+
+    form {
+        display:block;
+    }
+}
+
 
 @media screen and (max-width: 600px) {
     .wholepage {
