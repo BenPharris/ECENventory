@@ -1,29 +1,14 @@
-@media (max-width: 600px) {
-    .header {
-        width: 100%;
-    }
-
-    .searchpage {
-        width: 100%;
-        grid-template-columns:100%;
-    }
-    form {
-        width: 100%;
-        grid-template-columns:100%;
-    }
-}
-
 .wholepage {
-
+	width: 60%;
 }
 
 .content {
 	padding: 0px 20px;
 }
 
-.header{
+.header {
 	background-color: rgb(207, 184, 124);
-	width: 60%;
+/*	width: 60%; */
 	padding: 5px 5px;
 	margin-bottom: 8px;
 	text-align: center;
@@ -52,7 +37,7 @@ div {
 }
 
 .searchpage {
-	width: 60%;
+/*	width: 60%; */
 	display: grid;
     grid-template-columns:33% 34% 33%;
     grid-gap: 10px;
@@ -76,20 +61,20 @@ div {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.hideresult{
+.hideresult {
 /*	display: none; */
 	border-top: 1px solid rgba(162, 164, 163, 0.5);
 }
 
 .resulttable {
-	width:100%;
+
 	text-align: left;
 }
 
 
 
 form {
-	width: 60%;
+/*	width: 60%;  */
 	display: grid;
     grid-template-columns:33% 34% 33%;
     grid-gap: 5px;
@@ -135,17 +120,17 @@ label {
 	padding-right: 24px;
 }
 
-input[type=longtext]{
+input[type=longtext] {
 	transition: width 0.4s ease-in-out;
-	width: 98%;
+	width: 95%;
 
 }
 
-input[type=longtext]:focus{
+input[type=longtext]:focus {
 	width: 98%;
 }
 
-input[type=search]{
+input[type=search] {
 
 	background-image: url('./searchicon.png');
 	background-size: 20px 20px;
@@ -155,11 +140,11 @@ input[type=search]{
 	background-color: rgb(162, 164, 163);
 }
 
-input[type=date]{
+input[type=date] {
 	font-family: sans-serif;
 }
 
-input[type=submit]{
+input[type=submit] {
 	float: left;
 	text-align: center;
 	width: 110px;
@@ -171,7 +156,7 @@ input[type=submit]{
 	color: rgb(207, 184, 124);
 }
 
-input[type=reset]{
+input[type=reset] {
 	float: left;
 	text-align: center;
 	width: 90px;
@@ -184,7 +169,7 @@ input[type=reset]{
 }
 
 input {
-	width: 95%;
+	width: 95%; 
 	border-bottom: 2px solid rgb(207, 184, 124);
 	border-radius: 4px;
 	padding: 5px 5px;
@@ -194,7 +179,7 @@ input {
 	font-size: large;
 }
 
-input:focus{
+input:focus {
 	background-color: rgba(207, 184, 124, 0.5);
 }
 
@@ -216,4 +201,18 @@ a {
 	font-size: larger;
 	font-family: sans-serif;
 	color: rgb(86, 90, 92);
+}
+
+@media screen and (max-width: 600px) {
+    .wholepage {
+        width: 100%;
+    }
+
+    .searchpage {
+        grid-template-columns:100%;
+    }
+
+    form {
+        display:block;
+    }
 }
