@@ -17,7 +17,6 @@ echo "<div class='searchpage'>";
 		$notes = $row['notes'];
 
 		echo "<div class='result'>";
-		searchform('index.php',$barcode,"","hidden","Edit");
 		echo "<table class='resulttable'>
 		<tr>
 		<th>Barcode</th>
@@ -50,7 +49,7 @@ echo "<div class='searchpage'>";
 		" | " . 
 		$notes .
 		"</div></td></tr></table>";
-
+		searchform('index.php',$barcode,"","hidden","Edit");
 		
 		echo "</div>";
 	} 
