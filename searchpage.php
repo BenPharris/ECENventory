@@ -18,15 +18,22 @@ echo "<div class='searchpage'>";
 
 		echo "<div class='result'>";
 		searchform('index.php',$barcode,"","hidden","Edit");
-		echo 
-		$barcode . 
-		" | " . 
-		$manufacturer . 
-		" | " . 
-		$model . 
-		" | " . 
-		$type . 
-		"<div class='hideresult'> | " . 
+		echo "<table class='resulttable'>
+		<tr>
+		<th>Barcode</th>
+		<th>Manufacturer</th>
+		<th>Model</th>
+		<th>Type</th>
+		</tr>
+		<tr>
+		<td>" . $barcode . 
+		"</td>" . 
+		"<td>" . $manufacturer . 
+		"</td>" . 
+		"<td>" . $model . 
+		"</td>" . 
+		"<td>" . $type . "</tr>
+		<tr><td colspan = '4'><div class='hideresult'>" . 
 		$location . 
 		" | " . 
 		$user . 
@@ -42,7 +49,7 @@ echo "<div class='searchpage'>";
 		$description . 
 		" | " . 
 		$notes .
-		"</div>";
+		"</div></td></tr></table>";
 
 		
 		echo "</div>";
