@@ -6,6 +6,7 @@
 	<link rel="icon" type="image/png" href="./searchicon.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+<body>
 <div class='wholepage'>
 	<div class = 'content'>
 <?php
@@ -35,5 +36,5 @@ $link->close();
 ?>
 </div>
 </div>
-
+</body>
 </html>
