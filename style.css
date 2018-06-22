@@ -203,6 +203,8 @@ a {
 	color: rgb(86, 90, 92);
 }
 
+/* this is the responsive part of the stylesheet */
+
 @media screen and (max-width: 600px) {
     .wholepage {
         width: 100%;
