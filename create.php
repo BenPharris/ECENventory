@@ -21,13 +21,13 @@ $sql = "INSERT INTO items (barcode, type, manufacturer, model, location, user, s
 
 //executes insert statement if link is good. Otherwise errors
 if ($link->query($sql) === TRUE) {
-	echo "Success! Created record for " . $barcode;
+	echo "<div class = 'header'><h1>Success!</h1><h2>Created record for " . $barcode . "</h2></div>";
 } else {
-	echo "Error creating record: " . $link->error;
+	echo "<div class = 'header'><h1>Error creating record:</h1><h2>" . $link->error . "</h2></div>";
 }
 
 //brings up the search form again
-searchform();
+searchform('index.php','','');
 
 //close our mysql connection
 $link->close();

@@ -32,13 +32,13 @@ $sql = "UPDATE items SET
 
 //executes insert statement if link is good. Otherwise errors. Then brings up search form again.
 if ($link->query($sql) === TRUE) {
-	echo "Success!";
+	echo "<div class = 'header'><h1>Success!</h1></div>";
 } else {
-	echo "Error updating record: " . $link->error;
+	echo "<div class = 'header><h1>Error updating record:</h1><h2>" . $link->error . "</h2></div>";
 }
 
 //brings up the search form again
-searchform();
+searchform('index.php','','');
 
 //closes our mysql connection
 $link->close();
