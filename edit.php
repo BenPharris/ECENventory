@@ -34,7 +34,7 @@ $sql = "UPDATE items SET
 if ($link->query($sql) === TRUE) {
 	echo "<div class = 'header'><h1>Success!</h1></div>";
 } else {
-	echo "Error updating record: " . $link->error;
+	echo "<div class = 'header><h1>Error updating record:</h1><h2>" . $link->error . "</h2></div>";
 }
 
 //brings up the search form again

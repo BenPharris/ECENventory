@@ -16,12 +16,9 @@ echo "<div class='searchpage'>";
 		$description = $row['description'];
 		$notes = $row['notes'];
 
-
-
-
-
-
-		echo "<div class='result'>" . 
+		echo "<div class='result'>";
+		searchform('index.php',$barcode,"","hidden","Edit");
+		echo 
 		$barcode . 
 		" | " . 
 		$manufacturer . 
@@ -29,7 +26,7 @@ echo "<div class='searchpage'>";
 		$model . 
 		" | " . 
 		$type . 
-		" | " . 
+		"<div class='hideresult'> | " . 
 		$location . 
 		" | " . 
 		$user . 
@@ -44,9 +41,10 @@ echo "<div class='searchpage'>";
 		" | " . 
 		$description . 
 		" | " . 
-		$notes;
+		$notes .
+		"</div>";
 
-		searchform('index.php',$barcode,"","hidden","Edit");
+		
 		echo "</div>";
 	} 
 echo "</div>";
