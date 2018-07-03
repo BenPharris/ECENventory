@@ -5,7 +5,7 @@ function searchform($destination = 'index.php', $auto = '', $title = '<label for
 		<div class='searchbox'>
 		<form action='$destination' method='post'>
 		$title
-		<input type='$ishidden' id='$idchange' name='search' autofocus='autofocus' value='$auto' autocomplete='off'>
+		<input type='$ishidden' id='$idchange' name='$idchange' autofocus='autofocus' value='$auto' autocomplete='off'>
 		<input type='submit' value='$buttonlabel'>
 		</form>
 		</div>";

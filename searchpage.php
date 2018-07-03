@@ -50,7 +50,8 @@ echo "<div class='searchpage'>";
 		" | " . 
 		$notes .
 		"</div></td></tr></table>";
-		searchform('index.php',$itemid,"","hidden","Edit","idsearch");
+		searchform('index.php',$itemid,"","hidden","Edit",'idsearch');
+		searchform('delete.php',$itemid,"","hidden","Delete",'idsearch');
 		
 		echo "</div>";
 	} 

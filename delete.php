@@ -13,18 +13,16 @@
 <?php
 include 'searchform.php'; //defines searchform() function
 
-$itemid = htmlspecialchars($_POST['itemid']);
+$itemid = htmlspecialchars($_POST['idsearch']);
 
 include 'connection.php'; //connects to mysql
 
-$sql = "SELECT id, barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes FROM items WHERE 
-(
-	id LIKE '$itemid'
-)";
+$sql = "SELECT id, barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes FROM items WHERE id LIKE '$itemid'";
 
 $result = $link->query($sql);
 
 	while ($row = $result->fetch_assoc()) {
+		$itemid = $row["id"];
 		$barcode = $row["barcode"];
 		$type = $row["type"];
 		$manufacturer = $row["manufacturer"];
@@ -40,31 +38,17 @@ $result = $link->query($sql);
 		}
 
 
-//prepares Update query
-$today = date();
-$sqllog = "UPDATE deletions SET 
-	itemid = '$itemid',
-	barcode = '$barcode',
-	type = '$type',
-	manufacturer='$manufacturer', 
-	model='$model', 
-	location='$location', 
-	user='$user', 
-	serial='$serial', 
-	warranty_start='$warranty_start', 
-	warranty_end='$warranty_end', 
-	speedtype='$speedtype', 
-	description='$description', 
-	notes='$notes',
-	deletion_date='$today'
-	WHERE id=$itemid";
 
+//prepares Update query
+$today = gmdate("M d Y H:i:s");
+
+$sqllog = "INSERT INTO deletions (itemid, barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes, deletion_date)
+		VALUES ('$itemid', '$barcode', '$type', '$manufacturer', '$model', '$location', '$user', '$serial', '$warranty_start', '$warranty_end', '$speedtype', '$description', '$notes', '$today')";
 
 //executes insert statement if link is good. Otherwise errors. Then brings up search form again.
 if ($link->query($sqllog) === TRUE) {
-
-$sqldelete = "DELETE FROM items
-	WHERE id=$itemid";
+echo "test";
+$sqldelete = "DELETE FROM items	WHERE id=$itemid";
 
 	if ($link->query($sqldelete) === TRUE) {
 		echo "<div class = 'header'><h1>Success!</h1><h2>Deleted Record " . $barcode . " | " . $serial . "</div>";

@@ -101,5 +101,6 @@ include 'backbutton.php';
 echo "</div>";
 
 echo "</form></div>";
+searchform('delete.php',$itemid,"","hidden","Delete",'idsearch');
 
 ?>

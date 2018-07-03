@@ -13,18 +13,20 @@
 
 include 'searchform.php'; //defines searchform() function
 
+include 'connection.php';
+
 
 // $search = htmlspecialchars("$_POST[search]"); //grabs the input of the form named "search" and saves it to the $search variable
-if (!isset($_POST['search'])){
+if (!isset($_POST['search']) and !isset($_POST['idsearch'])){
 
 //call search form sending back to index.php (php_self)
 echo "<div class = 'header'><h1>ECEE Inventory System</h1></div>";
 
 searchform($_SERVER['PHP_SELF'],"","");
 
+
 } else {
 
-include 'connection.php';
 
 	if (isset($_POST['idsearch'])){
 		$itemid = htmlspecialchars("$_POST[idsearch]");
@@ -36,7 +38,6 @@ include 'connection.php';
 
 	} else {
 		$search = htmlspecialchars("$_POST[search]"); //grabs the input of the form named "search" and saves it to the $search variable
-
 		$sql = "SELECT id, barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes FROM items WHERE 
 	(
 	barcode LIKE '%$search%' 
