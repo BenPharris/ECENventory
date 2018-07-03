@@ -28,7 +28,7 @@ $search = htmlspecialchars("$_POST[search]"); //grabs the input of the form name
 
 include 'connection.php';
 
-$sql = "SELECT barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes FROM items WHERE 
+$sql = "SELECT id, barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes FROM items WHERE 
 (
 	barcode LIKE '%$search%' 
 	OR type LIKE '%$search%'
