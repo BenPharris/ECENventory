@@ -1,5 +1,6 @@
 <?php
 	while ($row = $result->fetch_assoc()) {
+		$itemid = $row["id"];
 		$barcode = $row["barcode"];
 		$type = $row["type"];
 		$manufacturer = $row["manufacturer"];

@@ -1,5 +1,6 @@
 <?php
 //takes post data and assigns it to variables
+$itemid = htmlspecialchars($_POST['itemid']);
 $barcode = htmlspecialchars($_POST['barcode']);
 $type = htmlspecialchars($_POST['type']);
 $manufacturer = htmlspecialchars($_POST['manufacturer']);
