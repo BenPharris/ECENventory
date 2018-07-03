@@ -3,6 +3,7 @@ echo
 "<div class='fullform'>
 
 <form action='$destination' method='post'>
+<input type='hidden' id='itemid' name='itemid' value = '$itemid' autocomplete = 'off'>
 
 <div class='barcodecontainer'>
 

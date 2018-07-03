@@ -4,13 +4,13 @@ include 'connection.php';
 
 $sqlitems = "CREATE TABLE IF NOT EXISTS items(
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	barcode varchar(8) UNIQUE,
+	barcode varchar(8),
 	type varchar(70),
 	manufacturer varchar(70),
 	model varchar(70),
 	location varchar(70),
 	user varchar(70),
-	serial varchar(70),
+	serial varchar(70) UNIQUE,
 	warranty_start varchar(70),
 	warranty_end varchar(70),
 	speedtype varchar(9),

@@ -32,6 +32,7 @@ echo "<div class='header'><h1> Creating Record for " . $titletext . " " . $searc
 <h2> $barcode000 </h2></div>";
 
 //sets variables for fullform.php. Most are empty because we're CREATING
+$itemid = "";
 $type = "";
 $manufacturer = "";
 $model = "";

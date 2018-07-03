@@ -23,7 +23,7 @@ $sql = "INSERT INTO items (barcode, type, manufacturer, model, location, user, s
 
 //executes insert statement if link is good. Otherwise errors
 if ($link->query($sql) === TRUE) {
-	echo "<div class = 'header'><h1>Success!</h1><h2>Created record for " . $barcode . "</h2></div>";
+	echo "<div class = 'header'><h1>Success!</h1><h2>Created record for " . $barcode . " | " . $serial . "</h2></div>";
 } else {
 	echo "<div class = 'header'><h1>Error creating record:</h1><h2>" . $link->error . "</h2></div>";
 }
