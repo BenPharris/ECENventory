@@ -3,6 +3,7 @@
 echo "<div class='header'><h1>Choose from $num_results items:</h1></div>";
 echo "<div class='searchpage'>";
 	while ($row = $result->fetch_assoc()) {
+		$itemid = $row["id"];
 		$barcode = $row["barcode"];
 		$manufacturer = $row['manufacturer'];
 		$model = $row['model'];
@@ -49,7 +50,7 @@ echo "<div class='searchpage'>";
 		" | " . 
 		$notes .
 		"</div></td></tr></table>";
-		searchform('index.php',$barcode,"","hidden","Edit");
+		searchform('index.php',$itemid,"","hidden","Edit","idsearch");
 		
 		echo "</div>";
 	} 
