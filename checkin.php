@@ -21,6 +21,7 @@ $date_out = htmlspecialchars($_POST['date_out']);
 $date_returned = htmlspecialchars($_POST['date_returned']);
 $date_due = htmlspecialchars($_POST['date_due']);
 $notes = htmlspecialchars($_POST['notes']);
+$emplid = htmlspecialchars($_POST['emplid']);
 
 include 'connection.php'; //connects to mysql
 
@@ -29,7 +30,8 @@ $sql = "UPDATE checkout_log SET
 	user='$checkoutuser',
 	email='$email',
 	date_returned='$date_returned',
-	notes='$notes'
+	notes='$notes',
+	emplid='$emplid'
 	WHERE transaction=$transaction";
 
 $sqlcheckin = "UPDATE items SET 
