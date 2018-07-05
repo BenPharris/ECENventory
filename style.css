@@ -8,12 +8,11 @@
 
 .header {
 	background-color: rgb(207, 184, 124);
-/*	width: 60%; */
 	padding: 5px 5px;
 	margin-bottom: 8px;
 	text-align: center;
-/*	border-radius: 4px; */
 }
+
 
 h1 {
 	font-family: sans-serif;
@@ -31,13 +30,12 @@ div {
 }
 
 .searchbox {
-	float:left;
+	display:inline;
 
 	width: 100%;
 }
 
 .searchpage {
-/*	width: 60%; */
 	display: grid;
     grid-template-columns:33% 34% 33%;
     grid-gap: 10px;
@@ -65,20 +63,60 @@ div {
 .hideresult {
 /*	display: none; */
 	border-top: 1px solid rgba(162, 164, 163, 0.5);
+
 }
 
 .resulttable {
-	width: 100%;
+	table-layout: fixed;
+	white-space:nowrap;
+	width:100%;
 	text-align: left;
 }
 
+td.nooverflowtd{
+	overflow:hidden;
+	white-space:nowrap;
+}
+
+/* checkout table items */
+
+.checkoutnotes {
+	border-bottom: 1px solid rgba(162, 164, 163, 0.5);
+}
+
+.checkouttable {
+	width: 100%;
+	text-align: left;
+	border-spacing:0px;
+
+}
+
+caption {
+	background-color: lightgreen;
+	padding: 5px 5px;
+	margin-bottom: 8px;
+	text-align: left;
+	font-size: larger;
+}
+/* highlight every 4th line starting with the 2nd and 3rd lines but only on checkout tables */
+tr.co:nth-child(4n+2) {
+	background: rgba(162, 164, 163, 0.5)
+}
+
+tr.co:nth-child(4n+3) {
+	background: rgba(162, 164, 163, 0.5)
+}
 
 
-form {
-/*	width: 60%;  */
+.fullform{
 	display: grid;
     grid-template-columns:33% 34% 33%;
     grid-gap: 5px;
+}
+
+
+.searchbox{
+	display:block;
 }
 
 
@@ -86,7 +124,6 @@ form {
 	padding: 5px;
 	margin: 8px 0;
 	box-sizing: border-box;
-/*	border-radius: 4px; */
 	outline: none;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 	font-family: sans-serif;
@@ -100,7 +137,6 @@ form {
 	padding: 5px;
 	margin: 8px 0;
 	box-sizing: border-box;
-/*	border-radius: 4px; */
 	outline: none;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 	font-family: sans-serif;
@@ -114,7 +150,6 @@ form {
 
 
 label {
-/*	grid-column: 1/2; */
 	font-family: sans-serif;
 	color: rgb(86, 90, 92);
 	padding-right: 24px;
@@ -131,7 +166,7 @@ input[type=longtext]:focus {
 }
 
 input[type=search] {
-
+	float: left;
 	background-image: url('./searchicon.png');
 	background-size: 20px 20px;
 	background-position: 3px 8px;
@@ -147,31 +182,28 @@ input[type=date] {
 input[type=submit] {
 	float: left;
 	text-align: center;
-	width: 110px;
+	width: 30%;
 	padding: 5px 5px;
 	margin: 3px 3px;
 	background-color: rgb(86, 90, 92);
 	border: none;
-	font-size: larger;
 	color: rgb(207, 184, 124);
 }
 
 input[type=reset] {
 	float: left;
 	text-align: center;
-	width: 90px;
+	width: 25%;
 	padding: 5px 5px;
 	margin: 3px 3px;
 	background-color:rgb(207, 184, 124);
 	border: none;
-	font-size: larger;
 	color: rgb(86, 90, 92);
 }
 
 input {
 	width: 95%; 
 	border-bottom: 2px solid rgb(207, 184, 124);
-/*	border-radius: 4px; */
 	padding: 5px 5px;
 	outline: none;
 	background-color: rgb(182, 184, 183);
@@ -184,16 +216,16 @@ input:focus {
 }
 
 .backbutton {
-	display: block;
+
 	text-align: center;
 	float: left;
-	width: 50px;
+	width: 75px;
 	padding: 5px 5px;
 	margin: 3px 3px;
 	border: none;
-/*	border-radius: 4px; */
 	outline: none;
 	background-color: lightblue;
+	font-size:medium;
 }
 
 a {

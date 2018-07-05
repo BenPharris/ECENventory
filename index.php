@@ -21,9 +21,9 @@ if (!isset($_POST['search']) and !isset($_POST['idsearch'])){
 
 //call search form sending back to index.php (php_self)
 echo "<div class = 'header'><h1>ECEE Inventory System</h1></div>";
-
+echo "<div class = 'searchpage'>";
 searchform($_SERVER['PHP_SELF'],"","");
-
+echo "</div>";
 
 } else {
 
@@ -31,14 +31,14 @@ searchform($_SERVER['PHP_SELF'],"","");
 	if (isset($_POST['idsearch'])){
 		$itemid = htmlspecialchars("$_POST[idsearch]");
 
-		$sql = "SELECT id, barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes FROM items WHERE 
+		$sql = "SELECT id, barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes, checkedout FROM items WHERE 
 			(
 			id LIKE '$itemid' 
 			)";
 
 	} else {
 		$search = htmlspecialchars("$_POST[search]"); //grabs the input of the form named "search" and saves it to the $search variable
-		$sql = "SELECT id, barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes FROM items WHERE 
+		$sql = "SELECT id, barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes, checkedout FROM items WHERE 
 	(
 	barcode LIKE '%$search%' 
 	OR type LIKE '%$search%'
@@ -54,12 +54,6 @@ searchform($_SERVER['PHP_SELF'],"","");
 	OR notes LIKE  '%$search%'
 	)";
 	}
-
-
-
-
-
-
 
 $result = $link->query($sql);
 $num_results = $result->num_rows;
@@ -79,7 +73,9 @@ include 'searchpage.php';
 
 } else {
 	echo "<div class = 'header'><h1>ECEE Inventory System</h1></div>";
+	echo "<div class = 'searchpage'>";
 	searchform('index.php', $search, '');
+	echo "</div>";
 	echo "<div>Too many results: (Found " . $num_results . " results)</div>";
 }
 
