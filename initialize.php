@@ -36,7 +36,8 @@ $sqlcheckout = "CREATE TABLE IF NOT EXISTS checkout_log(
 	date_out varchar(70),
 	date_returned varchar(70),
 	date_due varchar(70),
-	notes varchar(2048)
+	notes varchar(2048),
+	emplid varchar(9)
 )";
 
 if(mysqli_query($link, $sqlcheckout)){

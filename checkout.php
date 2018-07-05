@@ -20,12 +20,16 @@ $date_out = htmlspecialchars($_POST['date_out']);
 // $date_returned = htmlspecialchars($_POST['date_returned']);
 $date_due = htmlspecialchars($_POST['date_due']);
 $notes = htmlspecialchars($_POST['notes']);
+$tempemplid = htmlspecialchars($_POST['emplid']);
+$emplid = substr($tempemplid,19,9);
+
+
 
 include 'connection.php'; //connects to mysql
 
 // The order and number of items in the INSERT INTO and VALUES statements need to be identical
-$sql = "INSERT INTO checkout_log (item_id, user, email, date_out, date_due, notes)
-		VALUES ('$itemid', '$checkoutuser', '$email', '$date_out', '$date_due', '$notes')";
+$sql = "INSERT INTO checkout_log (item_id, user, email, date_out, date_due, notes, emplid)
+		VALUES ('$itemid', '$checkoutuser', '$email', '$date_out', '$date_due', '$notes', '$emplid')";
 
 $sqlcheckout = "UPDATE items SET 
 	checkedout = '1'

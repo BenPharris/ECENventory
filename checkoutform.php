@@ -51,6 +51,13 @@ echo
 	<input type='longtext' id='notes' name='notes' autocomplete='off'>
 </div>
 
+<div class='editinput'>
+	<label for='emplid'>Swipe BuffOneCard</label>
+	<input type='text' id='emplid' name='emplid' autocomplete='off'>
+</div>
+
+
+
 <div class= 'buttoncontainer'>
 
 <input type='submit' value='Check Out'>
@@ -64,7 +71,7 @@ echo "</form></div>";
 } elseif (isset($_POST['checkin'])){
 	$itemid = htmlspecialchars("$_POST[checkin]");
 
-	$sql = "SELECT transaction, user, email, date_out, date_returned, date_due, notes FROM checkout_log WHERE transaction=(SELECT MAX(transaction) FROM checkout_log) AND item_id=$itemid";
+	$sql = "SELECT transaction, user, email, date_out, date_returned, date_due, notes, emplid FROM checkout_log WHERE transaction=(SELECT MAX(transaction) FROM checkout_log) AND item_id=$itemid";
 	$inforesult = $link->query($sql);
 	while ($row = $inforesult->fetch_assoc()) {
 		$transaction = $row["transaction"];
@@ -74,6 +81,7 @@ echo "</form></div>";
 		$date_returned = $row['date_returned'];
 		$date_due = $row['date_due'];
 		$notes = $row['notes'];
+		$emplid = $row['emplid'];
 	}
 echo 
 "<div class = 'header'><h1>Checking in</h1></div>
@@ -111,6 +119,11 @@ echo
 <div class='editinput'>
 	<label for='notes'>Notes</label>
 	<input type='longtext' id='notes' name='notes' value = '$notes' autocomplete='off'>
+</div>
+
+<div class='editinput'>
+	<label for='emplid'>Employee or Student ID</label>
+	<input type='text' id='emplid' name='emplid' autocomplete='off'>
 </div>
 
 <div class= 'buttoncontainer'>
