@@ -40,7 +40,7 @@ $result = $link->query($sql);
 
 
 //prepares Update query
-$today = gmdate("M d Y H:i:s");
+$today = gmdate("Y.d.M H:i:s");
 
 $sqllog = "INSERT INTO deletions (itemid, barcode, type, manufacturer, model, location, user, serial, warranty_start, warranty_end, speedtype, description, notes, deletion_date)
 		VALUES ('$itemid', '$barcode', '$type', '$manufacturer', '$model', '$location', '$user', '$serial', '$warranty_start', '$warranty_end', '$speedtype', '$description', '$notes', '$today')";
@@ -59,7 +59,10 @@ $sqldelete = "DELETE FROM items	WHERE id=$itemid";
 }
 
 //brings up the search form again
+
+echo "<div class = 'searchpage'>";
 searchform('index.php','','');
+echo "</div>";
 
 //closes our mysql connection
 $link->close();

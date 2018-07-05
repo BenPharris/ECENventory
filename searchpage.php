@@ -16,9 +16,11 @@ echo "<div class='searchpage'>";
 		$speedtype = $row['speedtype'];
 		$description = $row['description'];
 		$notes = $row['notes'];
+		$checkedout = $row['checkedout'];
 
 		echo "<div class='result'>";
 		echo "<table class='resulttable'>
+		<col width = 25%><col width = 40%><col><col>
 		<tr>
 		<th>Barcode</th>
 		<th>Manufacturer</th>
@@ -28,12 +30,12 @@ echo "<div class='searchpage'>";
 		<tr>
 		<td>" . $barcode . 
 		"</td>" . 
-		"<td>" . $manufacturer . 
+		"<td class = 'nooverflowtd'>" . $manufacturer . 
 		"</td>" . 
-		"<td>" . $model . 
+		"<td class = 'nooverflowtd'>" . $model . 
 		"</td>" . 
-		"<td>" . $type . "</tr>
-		<tr><td colspan = '4'><div class='hideresult'>" . 
+		"<td class = 'nooverflowtd'>" . $type . "</tr>
+		<tr><td class='hideresult' colspan = '4'>" . 
 		$location . 
 		" | " . 
 		$user . 
@@ -49,9 +51,15 @@ echo "<div class='searchpage'>";
 		$description . 
 		" | " . 
 		$notes .
-		"</div></td></tr></table>";
+		"</td></tr></table>";
+		
 		searchform('index.php',$itemid,"","hidden","Edit",'idsearch');
 		searchform('delete.php',$itemid,"","hidden","Delete",'idsearch');
+		if ($checkedout === '1'){
+		searchform('checkoutform.php',$itemid,"","hidden","Check In",'checkin');
+		} else {
+		searchform('checkoutform.php',$itemid,"","hidden","Check Out",'checkout');
+		}
 		
 		echo "</div>";
 	} 

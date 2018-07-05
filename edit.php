@@ -41,8 +41,9 @@ if ($link->query($sql) === TRUE) {
 }
 
 //brings up the search form again
+echo "<div class = 'searchpage'>";
 searchform('index.php','','');
-
+echo "</div>";
 //closes our mysql connection
 $link->close();
 ?>

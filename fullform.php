@@ -1,8 +1,6 @@
 <?php
 echo 
-"<div class='fullform'>
-
-<form action='$destination' method='post'>
+"<form class = 'fullform' action='$destination' method='post'>
 <input type='hidden' id='itemid' name='itemid' value = '$itemid' autocomplete = 'off'>
 
 <div class='barcodecontainer'>
@@ -100,7 +98,8 @@ include 'backbutton.php';
 
 echo "</div>";
 
-echo "</form></div>";
+echo "</form>";
 searchform('delete.php',$itemid,"","hidden","Delete",'idsearch');
 
 ?>
+

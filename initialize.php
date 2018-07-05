@@ -17,7 +17,8 @@ $sqlitems = "CREATE TABLE IF NOT EXISTS items(
 	warranty_end varchar(70),
 	speedtype varchar(9),
 	description varchar(255),
-	notes varchar(2048)
+	notes varchar(2048),
+	checkedout tinyint(1)
 )";
 if(mysqli_query($link, $sqlitems)){
 	echo "Items table created successfully.<br>";
