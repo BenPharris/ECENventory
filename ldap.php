@@ -5,11 +5,10 @@ function culdapsearch($uuid) {
     $info = ldap_get_entries($ds, $sr);
     $fullname = $info[0]["cn"][0];
    	$email = $info[0]["mail"][0];
-    ldap_close($ds);
     $namearray = explode(',', $fullname,2);
     $lastname = $namearray[0];
     $firstname = $namearray[1];
-    $namearray = explode(',', $fullname,2);
+    ldap_close($ds);
 
 return array ($firstname, $lastname, $email);
 }
