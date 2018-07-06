@@ -15,6 +15,11 @@
 include 'connection.php'; //connects to mysql
 
 echo "I haven't built this yet";
+
+$sqlcheckouts = "SELECT * FROM checkout_log WHERE emplid=$emplid";
+$result = $link->query($sqlcheckouts);
+$num_results = $result->num_rows;
+
 /*
 // The order and number of items in the INSERT INTO and VALUES statements need to be identical
 $sql = "UPDATE checkout_log SET 
