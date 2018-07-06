@@ -12,6 +12,7 @@
 <?php
 
 include 'searchform.php'; //defines searchform() function
+include 'ldap.php';
 
 $itemid = htmlspecialchars($_POST['itemid']);
 $checkoutuser = htmlspecialchars($_POST['checkoutuser']);
@@ -21,8 +22,17 @@ $date_out = htmlspecialchars($_POST['date_out']);
 $date_due = htmlspecialchars($_POST['date_due']);
 $notes = htmlspecialchars($_POST['notes']);
 $tempemplid = htmlspecialchars($_POST['emplid']);
-$emplid = substr($tempemplid,19,9);
 
+if ($tempemplid != ""){
+
+$emplid = substr($tempemplid,-46,9);
+$idcard = culdapsearch($emplid);
+$checkoutuser = $idcard[0] . " " . $idcard[1];
+$email = $idcard[2];
+
+} else {
+	$emplid = $tempemplid;
+}
 
 
 include 'connection.php'; //connects to mysql

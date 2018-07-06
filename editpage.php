@@ -19,7 +19,6 @@
 //generate the form for EDITING then call edit.php
 echo "<div class='header'><h1> Editing Record for " . $barcode . " | " . $serial . "</h1></div>";
 
-
 //sets the variables necessary in fullform.php. Most are specified above by pulling from mysql
 $barcodelabel = "(Read Only)"; 
 $seriallabel = "";
