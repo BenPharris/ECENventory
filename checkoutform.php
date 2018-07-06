@@ -26,23 +26,12 @@ echo
 <form action='checkout.php' method='post'>
 <input type='hidden' id='itemid' name='itemid' value = '$itemid' autocomplete = 'off'>
 
-<div class='editinput'>
-	<label for='checkoutuser'>Check out to</label>
-	<input type='text' id='checkoutuser' name='checkoutuser'  autocomplete='off'>
-</div>
+
+	<input type='hidden' id='date_out' name='date_out' value='$today' autocomplete='off'>
+
 
 <div class='editinput'>
-	<label for='email'>Email</label>
-	<input type='text' id='email' name='email' autocomplete='off'>
-</div>
-
-<div class='editinput'>
-	<label for='date_out'>Date Out</label>
-	<input type='date' id='date_out' name='date_out' value='$today' autocomplete='off'>
-</div>
-
-<div class='editinput'>
-	<label for='date_due'>Date Due</label>	
+	<label for='date_due'>Date Due (optional)</label>	
 	<input type='date' id='date_due' name='date_due' autocomplete='off'>
 </div>
 
@@ -57,6 +46,12 @@ echo
 </div>
 
 
+	<input type='hidden' id='checkoutuser' name='checkoutuser'  autocomplete='off'>
+
+
+
+	<input type='hidden' id='email' name='email' autocomplete='off'>
+
 
 <div class= 'buttoncontainer'>
 
@@ -70,8 +65,12 @@ echo "</form></div>";
 
 } elseif (isset($_POST['checkin'])){
 	$itemid = htmlspecialchars("$_POST[checkin]");
+//this query is not working
+	$sqlprereq = "CREATE TEMPORARY TABLE tempcheckout AS SELECT * FROM checkout_log s1 WHERE transaction=(SELECT MAX(s2.transaction) FROM checkout_log s2 WHERE s1.item_id = s2.item_id)"; 
+	$sql = "SELECT * FROM tempcheckout WHERE item_id=$itemid";
+	
+	$link->query($sqlprereq);
 
-	$sql = "SELECT transaction, user, email, date_out, date_returned, date_due, notes, emplid FROM checkout_log WHERE transaction=(SELECT MAX(transaction) FROM checkout_log) AND item_id=$itemid";
 	$inforesult = $link->query($sql);
 	while ($row = $inforesult->fetch_assoc()) {
 		$transaction = $row["transaction"];
@@ -108,12 +107,12 @@ echo
 
 <div class='editinput'>
 	<label for='date_out'>Date Out (Read Only)</label>
-	<input type='date' id='date_out' name='date_out' value='$today' autocomplete='off' readonly='readonly'>
+	<input type='date' id='date_out' name='date_out' value='$date_out' autocomplete='off' readonly='readonly'>
 </div>
 
 <div class='editinput'>
 	<label for='date_due'>Date Due (Read Only)</label>	
-	<input type='date' id='date_due' name='date_due' value = '$date_out' autocomplete='off' readonly='readonly'>
+	<input type='date' id='date_due' name='date_due' value = '$date_due' autocomplete='off' readonly='readonly'>
 </div>
 
 <div class='editinput'>
@@ -122,8 +121,8 @@ echo
 </div>
 
 <div class='editinput'>
-	<label for='emplid'>Employee or Student ID</label>
-	<input type='text' id='emplid' name='emplid' autocomplete='off'>
+	<label for='emplid'>UUID</label>
+	<input type='text' id='emplid' name='emplid' value = '$emplid' autocomplete='off' readonly='readonly'>
 </div>
 
 <div class= 'buttoncontainer'>
