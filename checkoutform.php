@@ -41,17 +41,19 @@ echo
 </div>
 
 <div class='editinput'>
+	<label for='checkoutuser'>User (optional)</label>
+	<input type='text' id='checkoutuser' name='checkoutuser'  autocomplete='off'>
+</div>
+
+<div class='editinput'>
+	<label for='email'>Email (optional)</label>
+	<input type='text' id='email' name='email' autocomplete='off'>
+</div>
+
+<div class='editinput'>
 	<label for='emplid'>Swipe BuffOneCard</label>
 	<input type='text' id='emplid' name='emplid' autocomplete='off'>
 </div>
-
-
-	<input type='hidden' id='checkoutuser' name='checkoutuser'  autocomplete='off'>
-
-
-
-	<input type='hidden' id='email' name='email' autocomplete='off'>
-
 
 <div class= 'buttoncontainer'>
 
