@@ -66,5 +66,6 @@ echo "<div class='searchpage'>";
 echo "</div>";
 
 include 'backbutton.php';
+$link->close();
 
 ?>

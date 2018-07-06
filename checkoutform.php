@@ -144,7 +144,10 @@ echo "</form></div>";
 	searchform('index.php',"","");
 }
 
+$link->close();
+
 ?>
+
 
 </div>
 </div>
