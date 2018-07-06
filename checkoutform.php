@@ -18,9 +18,21 @@ include 'connection.php';
 
 if (isset($_POST['checkout'])){
 		$itemid = htmlspecialchars("$_POST[checkout]");
+
+
+$sqlinfo = "SELECT barcode, model, serial FROM items WHERE id LIKE '$itemid'";
+
+$result = $link->query($sqlinfo);
+
+	while ($row = $result->fetch_assoc()) {
+		$barcode = $row["barcode"];
+		$model = $row["model"];
+		$serial = $row["serial"];
+		}
+
 echo 
 
-"<div class = 'header'><h1>Checking out</h1></div>
+"<div class='header'><h1>Checking out</h1><h2>" . $barcode . " | " . $serial . " | " . $model . "</h2></div>
 <div class='fullform'>
 
 <form action='checkout.php' method='post'>
@@ -70,7 +82,9 @@ echo "</form></div>";
 //this query is not working
 	$sqlprereq = "CREATE TEMPORARY TABLE tempcheckout AS SELECT * FROM checkout_log s1 WHERE transaction=(SELECT MAX(s2.transaction) FROM checkout_log s2 WHERE s1.item_id = s2.item_id)"; 
 	$sql = "SELECT * FROM tempcheckout WHERE item_id=$itemid";
-	
+	$sqlinfo = "SELECT barcode, model, serial FROM items WHERE id LIKE '$itemid'";
+
+	$iteminfo = $link->query($sqlinfo);
 	$link->query($sqlprereq);
 
 	$inforesult = $link->query($sql);
@@ -84,8 +98,15 @@ echo "</form></div>";
 		$notes = $row['notes'];
 		$emplid = $row['emplid'];
 	}
+
+	while ($row = $iteminfo->fetch_assoc()) {
+		$barcode = $row["barcode"];
+		$model = $row["model"];
+		$serial = $row["serial"];
+		}
+
 echo 
-"<div class = 'header'><h1>Checking in</h1></div>
+"<div class='header'><h1>Checking in</h1><h2>" . $barcode . " | " . $serial . " | " . $model . "</h2></div>
 <div class='fullform'>
 
 <form action='checkin.php' method='post'>
@@ -141,10 +162,15 @@ echo "</form></div>";
 
 } else {
 	echo "<div class = 'header'><h1>Error:</h1><h2>No item specified</h2></div>";
+	echo "<div class = 'searchpage'>";
 	searchform('index.php',"","");
+	echo "</div>";
 }
 
+$link->close();
+
 ?>
+
 
 </div>
 </div>
