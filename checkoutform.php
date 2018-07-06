@@ -63,8 +63,7 @@ echo
 </div>
 
 <div class='editinput'>
-	<label for='emplid'>Swipe BuffOneCard</label>
-	<input type='text' id='emplid' name='emplid' autocomplete='off'>
+	<input type='text' id='emplid' name='emplid' autocomplete='off' placeholder='Swipe BuffOneCard'>
 </div>
 
 <div class= 'buttoncontainer'>
